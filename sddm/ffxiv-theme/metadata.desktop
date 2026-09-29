@@ -1,0 +1,10 @@
+[SddmGreeterTheme]
+Name        = ffxiv-login
+Description = Final Fantasy XIV — Animated Eorzea Login Screen
+Author      = You
+Version     = 1.0
+Website     = 
+Screenshot  = preview.png
+MainScript  = Main.qml
+ConfigFile  = theme.conf
+TranslationsDirectory = translations
