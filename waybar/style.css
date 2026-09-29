@@ -1,48 +1,140 @@
+/* ══════════════════════════════════════════════════════════
+   FINAL FANTASY XIV — Waybar Stylesheet
+   Font: Cinzel for labels, JetBrains Mono for times/numbers
+   ══════════════════════════════════════════════════════════ */
+
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&display=swap");
+
 * {
-  font-family: "JetBrainsMono Nerd Font";
-  font-size: 13px;
-  color: #d4c8a8;
+  font-family: 'Cinzel', 'Georgia', serif;
+  font-size: 11px;
   border: none;
+  border-radius: 0;
+  min-height: 0;
 }
 
 window#waybar {
-  background: rgba(8, 8, 10, 0.88);
-  border-bottom: 2px solid rgba(122, 31, 31, 0.95);
+  background: rgba(8, 12, 24, 0.90);
+  border: 1px solid rgba(180, 150, 90, 0.30);
+  border-radius: 6px;
+  color: #c8b89a;
+  box-shadow: 0 0 20px rgba(80, 60, 20, 0.20);
+  transition: background 0.3s;
 }
 
-#custom-launcher {
-  color: #ff4444;
+/* ── Left modules ── */
+#custom-menu {
+  color: #c8a840;
   padding: 0 14px;
-  font-size: 18px;
+  letter-spacing: 2px;
+  font-size: 10px;
+  border-right: 1px solid rgba(160, 128, 64, 0.20);
+}
+#custom-menu:hover { color: #f0d090; }
+
+#workspaces {
+  padding: 0 6px;
 }
 
-#custom-wallpaper {
-  color: #aa66ff;
-  padding: 0 12px;
+#workspaces button {
+  color: #5a4a30;
+  padding: 0 8px;
+  letter-spacing: 1px;
+  transition: all 0.2s;
 }
 
-#custom-sound {
-  color: #ffaa00;
-  padding: 0 12px;
+#workspaces button.active {
+  color: #d4b870;
+  text-shadow: 0 0 8px rgba(212, 184, 112, 0.6);
 }
 
-#clock {
-  color: #c9a86a;
-  padding: 0 18px;
-  font-weight: bold;
+#workspaces button.urgent {
+  color: #ff6060;
+  text-shadow: 0 0 8px rgba(255, 80, 80, 0.8);
 }
 
-#custom-alliance_a {
-  color: #8ea1ff;
-  padding: 0 12px;
+#workspaces button:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #a08040;
 }
 
-#custom-alliance_b {
-  color: #ff9966;
-  padding: 0 12px;
+#window {
+  color: #7a6a50;
+  padding: 0 10px;
+  font-size: 10px;
+  font-family: 'Cinzel', serif;
+  font-style: italic;
 }
 
-#custom-alliance_c {
-  color: #c9a86a;
-  padding: 0 12px;
+/* ── Centre: Eorzea Clock ── */
+#custom-eorzea-clock {
+  color: #d4b870;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 1px;
+  padding: 0 16px;
+  text-shadow: 0 0 10px rgba(180, 140, 60, 0.4);
+}
+
+/* ── Right modules ── */
+#custom-music {
+  color: #9a8060;
+  padding: 0 10px;
+  font-size: 10px;
+  font-family: 'Cinzel', serif;
+  border-right: 1px solid rgba(160, 128, 64, 0.15);
+}
+#custom-music:hover { color: #c8a840; cursor: pointer; }
+
+#pulseaudio {
+  color: #8a9ab8;
+  padding: 0 10px;
+}
+#pulseaudio.muted { color: #5a5a6a; }
+
+#network {
+  color: #6a9a70;
+  padding: 0 10px;
+}
+#network.disconnected { color: #9a6060; }
+
+#custom-disk {
+  color: #c8a840;
+  padding: 0 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+}
+
+#clock.local {
+  color: #f0d090;
+  padding: 0 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+#clock.utc {
+  color: #8aa0c8;
+  padding: 0 8px 0 2px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+#tray {
+  padding: 0 8px;
+  border-left: 1px solid rgba(160, 128, 64, 0.15);
+}
+
+#tray > .passive { -gtk-icon-effect: dim; }
+#tray > .needs-attention { -gtk-icon-effect: highlight; }
+
+/* ── Tooltips ── */
+tooltip {
+  background: rgba(8, 12, 24, 0.95);
+  border: 1px solid rgba(180, 150, 90, 0.35);
+  border-radius: 4px;
+  color: #c8b89a;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
 }

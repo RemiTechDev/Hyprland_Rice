@@ -1,61 +1,118 @@
 {
   "layer": "top",
-  "position": "top",
-  "height": 42,
+  "position": "bottom",
+  "height": 32,
+  "spacing": 0,
+  "margin-top": 0,
+  "margin-bottom": 6,
+  "margin-left": 8,
+  "margin-right": 8,
 
   "modules-left": [
-    "custom/launcher",
-    "custom/wallpaper",
-    "custom/sound"
+    "custom/menu",
+    "hyprland/workspaces",
+    "hyprland/window"
   ],
 
   "modules-center": [
-    "clock"
+    "custom/eorzea-clock"
   ],
 
   "modules-right": [
-    "custom/alliance_a",
-    "custom/alliance_b",
-    "custom/alliance_c"
+    "custom/music",
+    "pulseaudio",
+    "network",
+    "custom/disk",
+    "clock#local",
+    "clock#utc",
+    "tray"
   ],
 
-  "custom/launcher": {
-    "format": "🜂",
-    "tooltip": "Launcher",
-    "on-click": "rofi -show drun"
+  "custom/menu": {
+    "format": "⚙ Menu",
+    "tooltip": false,
+    "on-click": "rofi -show drun -theme ~/.config/rofi/ffxiv.rasi"
   },
 
-  "custom/wallpaper": {
-    "format": "🎞",
-    "tooltip": "Losowa animowana tapeta",
-    "on-click": "$HOME/Nobara_FF_UI/bin/wallpaper-random"
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "1": "Ⅰ", "2": "Ⅱ", "3": "Ⅲ", "4": "Ⅳ",
+      "5": "Ⅴ", "6": "Ⅵ", "7": "Ⅶ", "8": "Ⅷ",
+      "urgent": "",
+      "active": "",
+      "default": ""
+    },
+    "on-click": "activate",
+    "sort-by-number": true
   },
 
-  "custom/sound": {
-    "format": "🔔",
-    "tooltip": "Test dźwięku UI",
-    "on-click": "$HOME/Nobara_FF_UI/bin/play-sound \"Duty Pop\""
+  "hyprland/window": {
+    "format": "{}",
+    "max-length": 40,
+    "separate-outputs": true
   },
 
-  "custom/alliance_a": {
-    "exec": "python3 $HOME/Nobara_FF_UI/modules/alliance/alliance_a_discord/waybar_output.py",
+  "custom/eorzea-clock": {
+    "exec": "~/.config/eww/scripts/eorzea_time.py",
+    "interval": 1,
+    "format": " ET {}",
+    "tooltip": false
+  },
+
+  "custom/music": {
+    "exec": "playerctl metadata --format '{{title}} — {{artist}}' 2>/dev/null | cut -c1-36",
     "interval": 2,
-    "tooltip": "Alliance A - Discord"
+    "format": "♪ {}",
+    "on-click": "playerctl play-pause",
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous",
+    "max-length": 38,
+    "tooltip": false
   },
 
-  "custom/alliance_b": {
-    "exec": "python3 $HOME/Nobara_FF_UI/modules/alliance/alliance_b_system/waybar_output.py",
-    "interval": 2,
-    "tooltip": "Alliance B - System"
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "  0%",
+    "format-icons": {
+      "default": ["", "", ""]
+    },
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+    "tooltip": false
   },
 
-  "custom/alliance_c": {
-    "exec": "python3 $HOME/Nobara_FF_UI/modules/alliance/alliance_c_apps/waybar_output.py",
-    "interval": 3,
-    "tooltip": "Alliance C - Apps"
+  "network": {
+    "format-wifi": " {essid}",
+    "format-ethernet": " {ipaddr}",
+    "format-disconnected": " offline",
+    "tooltip-format": "{ifname}: {ipaddr}  {gwaddr}\n{essid} ({signalStrength}%)\n↓{bandwidthDownBytes}  ↑{bandwidthUpBytes}",
+    "on-click": "nm-connection-editor"
   },
 
-  "clock": {
-    "format": "ET {:%I:%M %p}"
+  "custom/disk": {
+    "exec": "df -h / | awk 'NR==2{print \"🪙 \"$4\" free\"}'",
+    "interval": 10,
+    "format": "{}",
+    "tooltip": false
+  },
+
+  "clock#local": {
+    "format": "LT {:%H:%M:%S}",
+    "interval": 1,
+    "tooltip-format": "<b>Local Time</b>\n{:%A, %B %d %Y\n%H:%M:%S}"
+  },
+
+  "clock#utc": {
+    "format": "ST {:%H:%M:%S}",
+    "interval": 1,
+    "timezone": "UTC",
+    "tooltip-format": "<b>Server Time (UTC)</b>\n{:%A, %B %d %Y\n%H:%M:%S}"
+  },
+
+  "tray": {
+    "icon-size": 14,
+    "spacing": 6
   }
 }
